@@ -8,7 +8,7 @@ import SignIn from './components/SignIn.vue'
     <router-link to="/">Go to Home</router-link>
     <img alt="Logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
     <div class="wrapper" id="signOut">
-      <div><SignIn msg="User, please sign in !" /></div>
+      <div><SignIn msg="Poet, please sign in !" /></div>
       <label>email: </label><br>
 	    <input type="email" required v-model="email" placeholder="username@domain.tld"><br>
 	    <label>password: </label><br>
