@@ -14,7 +14,7 @@ import PocketBase from "pocketbase";
       height="125"
     />
     <div class="wrapper" id="signOut">
-      <div><SignIn msg="User, please sign in !" /></div>
+      <div><SignIn msg="Poet, please sign in !" /></div>
       
      
       <button v-on:click="login()">Sign by Google</button>
