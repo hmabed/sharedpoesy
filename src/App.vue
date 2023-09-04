@@ -15,17 +15,9 @@ import PocketBase from "pocketbase";
     />
     <div class="wrapper" id="signOut">
       <div><SignIn msg="User, please sign in !" /></div>
-      <label>email: </label><br />
-      <input
-        type="email"
-        required
-        id="email"
-        placeholder="username@domain.tld"
-      /><br />
-      <label>password: </label><br />
-      <input type="password" required id="passwd" /><br />
-      <button v-on:click="register()">Sign Up</button>
-      <button v-on:click="login()">Sign In</button>
+      
+     
+      <button v-on:click="login()">Sign by Google</button>
       <button v-on:click="logout()">Sign out</button>
       <p><label id="status"> You are not yet connected </label><br /></p>
     </div>
