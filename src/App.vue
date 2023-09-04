@@ -1,61 +1,77 @@
 <script setup>
-import SignIn from './components/SignIn.vue'
-
+import SignIn from "./components/SignIn.vue";
+import PocketBase from "pocketbase";
 </script>
 
-<template>    
+<template>
   <header>
     <router-link to="/">Go to Home</router-link>
-    <img alt="Logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Logo"
+      class="logo"
+      src="./assets/logo.svg"
+      width="125"
+      height="125"
+    />
     <div class="wrapper" id="signOut">
-      <div><SignIn msg="Poet, please sign in !" /></div>
-      <label>email: </label><br>
-	    <input type="email" required v-model="email" placeholder="username@domain.tld"><br>
-	    <label>password: </label><br>
-	    <input type="password" required v-model="passwd" ><br>
+      <div><SignIn msg="User, please sign in !" /></div>
+      <label>email: </label><br />
+      <input
+        type="email"
+        required
+        id="email"
+        placeholder="username@domain.tld"
+      /><br />
+      <label>password: </label><br />
+      <input type="password" required id="passwd" /><br />
       <button v-on:click="register()">Sign Up</button>
       <button v-on:click="login()">Sign In</button>
-      <p>
-      <label id="status"> You are not yet connected </label><br>  
-      </p>
+      <button v-on:click="logout()">Sign out</button>
+      <p><label id="status"> You are not yet connected </label><br /></p>
     </div>
   </header>
-  
-  <main>
-    
-  </main>
+
+  <main></main>
 </template>
 
 <script>
-
-
-
+var pocketbase_ip = "";
+if (import.meta.env.MODE === "production")
+  pocketbase_ip = "http://193.168.146.38:80";
+else pocketbase_ip = "http://127.0.0.1:8090";
+const pb = new PocketBase(pocketbase_ip);
 
 export default {
-  methods: {  
+  methods: {
     //this method allows a new user to sign up the system. Once done, the user receives an email
     //asking for account validation. Once the validation made the user is added to the system
-    async register(){
+    async login() {
+      /*await pb
+        .collection("users")
+        .authWithPassword(
+          document.getElementById("email").value,
+          document.getElementById("passwd").value
+        );*/
+      await pb
+        .collection("users")
+        .authWithOAuth2({ provider: 'google' });
       
-    },
-    //this method allows the already registred user to log in the system.
-    async login(){
-       
     }
-  }  
-}
+    
+  },
+};
 </script>
 
 <style>
-@import './assets/base.css';
+@import "./assets/base.css";
 
 header .hidden {
-    visibility: hidden;
-    overflow: hidden;
-    display: flex;
-    display:inline-block;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  display: inline-block;
+  place-items: flex-start;
+  flex-wrap: wrap;
 }
 
 #app {
@@ -108,7 +124,7 @@ a,
 
   header .wrapper {
     display: flex;
-    display:inline-block;
+    display: inline-block;
     place-items: flex-start;
     flex-wrap: wrap;
   }
